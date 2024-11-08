@@ -58,7 +58,7 @@ function ld_email_confirmation_send_email($user_id) {
     $site_name = get_bloginfo('name');
     $site_url = home_url();
     $from_name = 'The ' . $site_name . ' Team';
-    $from_email = 'info@' . parse_url($site_url, PHP_URL_HOST);
+    $from_email = 'wordpress@' . parse_url($site_url, PHP_URL_HOST); // Update the email address here
 
     // Email subject and body
     $subject = sprintf('Please Confirm Your Email Address for %s', $site_name);
