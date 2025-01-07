@@ -61,9 +61,9 @@ function ld_email_confirmation_send_email($user_id) {
     $from_email = 'wordpress@' . parse_url($site_url, PHP_URL_HOST); // Update the email address here
 
     // Email subject and body
-    $subject = sprintf('Please Confirm Your Email Address for %s', $site_name);
+    $subject = sprintf('Confirm Your Email Address for %s', $site_name);
     $message = <<<EMAIL
-                Hello,
+                Hello {$user_info->user_login},
                 <br><br>
                 Thank you for registering at {$site_name}. To complete your registration and access your account, please confirm your email address by clicking the link below:
                 <br><br>
@@ -79,11 +79,16 @@ function ld_email_confirmation_send_email($user_id) {
     // Email headers
     $headers = array(
         'Content-Type: text/html; charset=UTF-8',
-        'From: ' . $from_name . ' <' . $from_email . '>'
+        'From: ' . sanitize_text_field($from_name) . ' <' . sanitize_email($from_email) . '>',
+        'Reply-To: ' . sanitize_email($from_email),
     );
 
     // Send the email
     wp_mail($user_email, $subject, $message, $headers);
+
+    if (isset($_POST['password'])) { 
+        wp_set_password(sanitize_text_field($_POST['password']), $user_id);
+    }
     
     set_transient('ld-registered-notice', true, 60);
     wp_redirect(add_query_arg('registered', 'true', home_url()));
