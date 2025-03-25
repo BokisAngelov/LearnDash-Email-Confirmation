@@ -67,7 +67,7 @@ function ld_email_confirmation_send_email($user_id) {
                 <br><br>
                 Thank you for registering at {$site_name}. To complete your registration and access your account, please confirm your email address by clicking the link below:
                 <br><br>
-                {$confirmation_link}
+                <a href="{$confirmation_link}" target="_blank">Confirm Email</a>
                 <br><br>
                 If you did not request this, please ignore this email.
                 <br><br>
