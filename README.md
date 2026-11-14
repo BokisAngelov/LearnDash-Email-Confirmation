@@ -18,9 +18,13 @@ Enhance your LearnDash LMS with email confirmation functionality to secure and s
 
 ## Usage
 
-Once activated, the plugin automatically sends a confirmation email to new users who register through LearnDash. The email includes a link that users must click to confirm their email address before they can access course content.
+Once activated, the plugin automatically sends a confirmation email to new users who register through LearnDash. The email includes a link that users must click to confirm their email address before they can log in. The link expires after 48 hours (change it with `define('LD_EMAIL_CONFIRMATION_TTL_HOURS', 24);` in `wp-config.php`). Users created by an administrator, via REST, WP-CLI or an import are marked as confirmed automatically and receive no email.
 
 Admins can manually confirm users by navigating to the Users page in the WordPress admin area, where a new column indicates each user's confirmation status along with an option to confirm each user manually.
+
+## Security
+
+See [SECURITY.md](SECURITY.md) to report a vulnerability and [docs/security.md](docs/security.md) for how the plugin is protected and how the automated scans work. Version 1.1.0 fixes a critical authentication bypass, so please update from 1.0.x.
 
 ## Contributing
 
